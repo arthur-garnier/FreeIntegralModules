@@ -7,4 +7,23 @@ if fail = LoadPackage("AutoDoc", "2018.02.14") then
     Error("AutoDoc version 2018.02.14 or newer is required.");
 fi;
 
-AutoDoc( rec( scaffold := true, autodoc := true ) );
+AutoDoc(rec(
+    gapdoc := rec(
+        LaTeXOptions := rec(
+            LateExtraPreamble := """
+                \usepackage{amsmath}
+                \usepackage[T1]{fontenc}
+                \usepackage{tikz}
+                \usetikzlibrary{shapes,arrows,matrix}
+                """
+        ),
+    ),
+    scaffold := rec(
+        entities := [ "GAP4", "CAP" ],
+    ),
+    autodoc := rec( files := [ "doc/Intros.autodoc" ] ),
+    extract_examples := rec( units := "Single" )
+));
+
+QUIT;
+

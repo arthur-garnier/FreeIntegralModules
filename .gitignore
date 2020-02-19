@@ -1,3 +1,5 @@
+/maketest.g
+/tst/*.tst
 /doc/*.xml
 
 /doc/chap*.html
