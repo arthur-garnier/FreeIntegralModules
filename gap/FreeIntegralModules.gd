@@ -81,7 +81,7 @@ DeclareGlobalFunction( "AsQGMatrix" , [ IsList, IsList, IsList ] );
 #! The input is a field $k$ of characteristic zero 
 #! (which, for now, is forced to be equal to $\mathbb{Q}$)
 #! and a finite group $G$.
-#! The output is a list $[CG,ZCG,RowsG,RepG,S]$ with $CG, $ZCG$ and $RowsG$ the
+#! The output is a list $[CG,ZCG,RowsG,RepG,S]$ with $CG$, $ZCG$ and $RowsG$ the
 #! categories constructed by by $FreeIntMods(G)$, $RepG$ is the skeletal category constructed
 #! by $Reps(k,G)$ and $S$ is the scalar extension functor
 #! $-\otimes_{\mathbb{Z}} \mathbb{Q} : \mathbb{Z}[G]-free \to \mathbb{Q}[G]-Mod$.
@@ -103,8 +103,8 @@ DeclareGlobalFunction( "Skeletification" , [ IsField, IsGroup ] );
 #! The input is a finite group $G$.
 #! The output is a list $[RowsG,Z_mod,F]$ with $RowsG$ the category
 #! of left free $\mathbb{Z}[G]$-modules of finite rank, $Z_mod$ is
-#! the category of abelian groups and $F$ is the forgetfull functor
-#! $\mathbb{Z}[G]-free \to \Z-Mod$.
+#! the category of abelian groups and $F$ is the forgetful functor
+#! $\mathbb{Z}[G]-free \to \mathbb{Z}-Mod$.
 #! @Arguments G
 #! @Returns a list
 DeclareGlobalFunction( "ForgetToZ" , [ IsGroup ] );
