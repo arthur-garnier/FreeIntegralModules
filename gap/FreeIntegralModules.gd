@@ -81,9 +81,7 @@ DeclareGlobalFunction( "AsQGMatrix" , [ IsList, IsList, IsList ] );
 #! The input is a field $k$ of characteristic zero 
 #! (which, for now, is forced to be equal to $\mathbb{Q}$)
 #! and a finite group $G$.
-#! The output is a list $[CG,ZCG,RowsG,RepG,S]$ with $CG$, $ZCG$ and $RowsG$ the
-#! categories constructed by by $FreeIntMods(G)$, $RepG$ is the skeletal category constructed
-#! by $Reps(k,G)$ and $S$ is the scalar extension functor
+#! The output is the scalar extension functor 
 #! $-\otimes_{\mathbb{Z}} \mathbb{Q} : \mathbb{Z}[G]-free \to \mathbb{Q}[G]-Mod$.
 #! Given a free $\mathbb{Z}[G]$-module $\mathbb{Z}[G]^n$, it returns $reg^n$,
 #! where $reg$ is the regular representation constructed by $Reps(k,G)[3]$.

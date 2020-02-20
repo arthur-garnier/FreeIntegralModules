@@ -113,7 +113,7 @@ InstallGlobalFunction( Skeletification,
 	return( f );
 	end );
 	
-	return( [ CG, ZCG, RowsG, RepG, Skeletification ] );
+	return Skeletification;
 end );
 
 

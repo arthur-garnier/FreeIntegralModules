@@ -12,9 +12,11 @@ LoadPackage( "freeintegralmodules" );
 
 #! @Example
 Q := Rationals;; G := SymmetricGroup( 3 );;
-Ske := Skeletification( Q, G );;
-
-CG := Ske[1];; ZCG := Ske[2];; RowsG := Ske[3];; RepG := Ske[4];; Skel := Ske[5];;
+Skel := Skeletification( Q, G );;
+RepG := AsCapCategory( Range( Skel ) );;
+RowsG := AsCapCategory( Source( Skel ) );;
+ZCG := UnderlyingCategory( RowsG );;
+CG := UnderlyingCategory( ZCG );;
 
 s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; s0 := sa*sb*sa;; ze := sa-sa;;
 
