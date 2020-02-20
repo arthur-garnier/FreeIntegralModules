@@ -29,7 +29,7 @@ DeclareGlobalFunction( "FreeIntegralModules_Example" );
 #! These constructions are due to Sebastian Posur.
 #! @Arguments G
 #! @Returns a list
-DeclareGlobalFunction( "FreeIntMods" , [ IsGroup ] );
+DeclareAttribute( "FREE_INT_MODS" , IsGroup );
 
 #! @Description
 #! The input is a field $k$ and a finite group $G$.
@@ -41,7 +41,7 @@ DeclareGlobalFunction( "FreeIntMods" , [ IsGroup ] );
 #! multiplications by elements of $G$ on the standard basis of $kG$.
 #! @Arguments k,G
 #! @Returns a list 
-DeclareGlobalFunction( "LeftQGMods" , [ IsField, IsGroup ] );
+DeclareOperation( "LEFT_KG_MODS" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a field $k$ of characteristic zero 
@@ -59,15 +59,7 @@ DeclareGlobalFunction( "LeftQGMods" , [ IsField, IsGroup ] );
 #! isotypic component.
 #! @Arguments k,G
 #! @Returns a list
-DeclareGlobalFunction( "Reps" , [ IsField, IsGroup ] );
-
-#! @Description
-#! The input is a field $k$ and a homalg matrix $MH$.
-#! The output is the same matrix, seen as a GAP matrix.
-#! This function is used in $AsQGMatrix$.
-#! @Arguments MH
-#! @Returns a matrix
-DeclareGlobalFunction( "AsGAPMatrix" , [ IsField, IsHomalgMatrix ] );
+DeclareGlobalFunction( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a morphism $f$ in $RowsG$.
@@ -81,9 +73,7 @@ DeclareGlobalFunction( "AsQGMatrix" , [ IsList, IsList, IsList ] );
 #! The input is a field $k$ of characteristic zero 
 #! (which, for now, is forced to be equal to $\mathbb{Q}$)
 #! and a finite group $G$.
-#! The output is a list $[CG,ZCG,RowsG,RepG,S]$ with $CG$, $ZCG$ and $RowsG$ the
-#! categories constructed by by $FreeIntMods(G)$, $RepG$ is the skeletal category constructed
-#! by $Reps(k,G)$ and $S$ is the scalar extension functor
+#! The output is the scalar extension functor 
 #! $-\otimes_{\mathbb{Z}} \mathbb{Q} : \mathbb{Z}[G]-free \to \mathbb{Q}[G]-Mod$.
 #! Given a free $\mathbb{Z}[G]$-module $\mathbb{Z}[G]^n$, it returns $reg^n$,
 #! where $reg$ is the regular representation constructed by $Reps(k,G)[3]$.
@@ -107,11 +97,11 @@ DeclareGlobalFunction( "Skeletification" , [ IsField, IsGroup ] );
 #! $\mathbb{Z}[G]-free \to \mathbb{Z}-Mod$.
 #! @Arguments G
 #! @Returns a list
-DeclareGlobalFunction( "ForgetToZ" , [ IsGroup ] );
+DeclareAttribute( "ForgetToZ" , IsGroup );
 
 #! @Description
 #! The input is a complex in the category of left presentations of $\mathbb{Z}$
 #! The output is the corresponding chain complex, expressed in homalg (not in CAP).
 #! @Arguments C
 #! @Returns a homalg complex
-DeclareGlobalFunction( "PresentationsToHomalgComplex" , [ IsChainComplex ] );
+DeclareAttribute( "PresentationsToHomalgComplex" , IsChainComplex );

@@ -8,8 +8,8 @@ function()
 	Print( "This is a placeholder function, replace it with your own code.\n" );
 end );
 
-InstallGlobalFunction( FreeIntMods,
-		[IsGroup],
+InstallMethod( FREE_INT_MODS,
+		[ IsGroup ],
 	function( G )
 	local CG, compare_func, ZCG, RowsG;
 	CG := GroupAsCategory( G );;
@@ -19,8 +19,8 @@ InstallGlobalFunction( FreeIntMods,
 end );
 
 
-InstallGlobalFunction( LeftQGMods,
-		[IsField, IsGroup],
+InstallMethod( LEFT_KG_MODS,
+		[ IsField, IsGroup ],
 	function( Q, G )
 	local QG, g1, B, M;
 	QG := GroupRing( Q, G );; g1 := One( QG );; B := Basis( QG, List( Elements( G ), g -> g1 * g ) );;
@@ -29,8 +29,8 @@ InstallGlobalFunction( LeftQGMods,
 end );
 
 
-InstallGlobalFunction( Reps, 
-		[IsField, IsGroup],
+InstallGlobalFunction( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
+		[ IsField, IsGroup ],
 	function( Q, G )
 	local RepG, reg, Irrs, c, Mchi;
 	RepG := RepresentationCategory( G );
@@ -43,19 +43,6 @@ InstallGlobalFunction( Reps,
 	return( [ RepG, Irrs, reg, Mchi ] );
 end );
 
-
-InstallGlobalFunction( AsGAPMatrix,
-		[IsField, IsHomalgMatrix],
-	function( Q, MH )
-	local m, n, i, j, Mat;
-	m := DimensionsMat( MH )[ 1 ];; n := DimensionsMat( MH )[ 2 ];; Mat:=NullMat( m, n, Q );;
-	for i in [1..m] do
-	for j in [1..n] do
-	Mat[ i, j ]:=MH[ i, j ]; od; od;
-	return( Mat );
-end );
-
-
 InstallGlobalFunction( AsQGMatrix,
 		[IsList, IsList, IsList],
 	function( F, L, f )
@@ -63,7 +50,7 @@ InstallGlobalFunction( AsQGMatrix,
 	RowsG := F[3]; 
 	u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
 	QG := L[1]; B := L[2]; M := L[3]; sG := Size( UnderlyingGroup( F[1] ) );
-	Mat := AsGAPMatrix( LeftActingDomain( QG ), UnderlyingMatrix( HomStructure( u , f/RowsG ) ) );; m := DimensionsMat( Mat )[ 1 ]/sG;; n := DimensionsMat( Mat )[ 2 ]/sG;;
+	Mat := EntriesOfHomalgMatrixAsListList( UnderlyingMatrix( HomStructure( u , f/RowsG ) ) );; m := DimensionsMat( Mat )[ 1 ]/sG;; n := DimensionsMat( Mat )[ 2 ]/sG;;
 	MatG := NullMat( m , n , QG );;
 	for i in [1..m] do
 	for j in [1..n] do
@@ -78,7 +65,7 @@ InstallGlobalFunction( Skeletification,
 		[IsField, IsGroup],
 	function( Q, G )
 	local Skeletification, F, R, L, RowsG, reg, B, Mchi, Qrep, Irrs, RepG, sG, CG, ZCG;
-	F := FreeIntMods( G ); L := LeftQGMods( Q, G ); R := Reps( Q, G );
+	F := FREE_INT_MODS( G ); L := LEFT_KG_MODS( Q, G ); R := IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR( Q, G );
 	CG := F[1]; ZCG := F[2]; RowsG := CapCategory( Source( [ [ One( G )/F[1]/F[2] ] ]/F[3] ) ); B := L[2]; 
 	RepG := R[1]; Irrs := R[2]; reg := R[3]; Mchi := R[4]; Qrep := UnderlyingFieldForHomalgForSemisimpleCategory( R[1] ); sG := Size( UnderlyingGroup( F[1] ) );
 	
@@ -113,15 +100,15 @@ InstallGlobalFunction( Skeletification,
 	return( f );
 	end );
 	
-	return( [ CG, ZCG, RowsG, RepG, Skeletification ] );
+	return Skeletification;
 end );
 
 
-InstallGlobalFunction( ForgetToZ, 
-		[IsGroup],
+InstallMethod( ForgetToZ, 
+		[ IsGroup ],
 	function( G )
 	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Forget, sG;
-	F := FreeIntMods( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
+	F := FREE_INT_MODS( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
 	R := HomalgRing( UnderlyingMatrix( HomStructure( u,[ [ One(G)/CG/ZCG ] ]/RowsG ) ) ) ; 
 	R1 := FreeLeftPresentation( 1, R ) ; R1 := AsLeftPresentation( HomalgMatrix( "[[ 1 ]]", R ) ) ;
 	Z_mod := LeftPresentations( R ) ; sG := Size( UnderlyingGroup( CG ) );
@@ -137,18 +124,18 @@ InstallGlobalFunction( ForgetToZ,
 	function( new_source, mor, new_range )
 	return( AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( HomStructure( u, mor ) ) ) );
 	end );
-	return( [ CG, ZCG, RowsG, Z_mod, Forget ] );
+	return Forget;
 end );
 
 
-InstallGlobalFunction( PresentationsToHomalgComplex,
-		[IsChainComplex],
+InstallMethod( PresentationsToHomalgComplex,
+		[ IsChainComplex ],
 	function( C )
 	local R, m, M, Objs, Mors, CC, n;
 	R := HomalgRing( UnderlyingMatrix( Differentials( C )[0] ) );
 	m := ActiveLowerBound( C ) + 1; M := ActiveUpperBound( C ) - 1;
 	Objs := List( [ m..M ], n -> Sum( DimensionsMat( UnderlyingMatrix( Objects( C )[n] ) ) )*R );
-	Mors := List( [ m + 1..M ], n -> TransposedMatrix( HomalgMatrix( AsGAPMatrix( Integers, UnderlyingMatrix( Differentials( C )[n] ) ), R ) ) );
+	Mors := List( [ m + 1..M ], n -> TransposedMatrix( HomalgMatrix( EntriesOfHomalgMatrixAsListList( UnderlyingMatrix( Differentials( C )[n] ) ), R ) ) );
 	Mors := List( [ 0..Size( Mors ) - 1 ], n -> HomalgMap( Mors[ Size( Mors ) - n ], Objs[ Size( Objs ) - n - 1 ], Objs[ Size( Objs ) - n ] ) );
 	CC := HomalgComplex( Mors[1], m + 1 ); 
 	if Size( Mors ) > 1 then 
@@ -156,35 +143,3 @@ InstallGlobalFunction( PresentationsToHomalgComplex,
 	Add( CC, Mors[n] ); od; fi;
 	return( CC );
 end );
-
-
-#InstallGlobalFunction( ForgetToZ, 
-#		[IsGroup],
-#	function( G )
-#	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Ch_Z, Forget;
-#	F := FreeIntMods( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
-#	R := HomalgRing( UnderlyingMatrix( HomStructure( u,[ [ One(G)/CG/ZCG ] ]/RowsG ) ) ) ; 
-#	R1 := FreeLeftPresentation( 1, R ) ; R1 := AsLeftPresentation( HomalgMatrix( "[[ 1 ]]", R ) ) ;
-#	Z_mod := LeftPresentations( R ) ;
-#	Ch_Z := ChainComplexCategory( Z_mod ) ;
-#
-#	Forget := CapFunctor( "Forget", CapCategory( ChainComplex( [ [ [ One(G)/CG/ZCG ] ]/RowsW ], 0 ) ), Ch_Z );
-#
-#	AddObjectFunction( Forget,
-#	function( obj )
-#	local D;
-#	D := List( Differentials( obj ), d -> HomStructure( u, d ) );
-#	D := List( [ ActiveLowerBound( obj ) + 2..ActiveUpperBound( obj ) - 1 ], n-> AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( D[n] ) ) );
-#	return( ChainComplex( D, ActiveLowerBound( obj ) + 2 ) );
-#	end );
-#
-#	AddMorphismFunction( Forget,
-#	function(new_source,mor,new_range)
-#	local Mor;
-#	Mor := List( Morphisms( mor ), f -> HomStructure( u, f ) );
-#	Mor := List( [ ActiveLowerBound( mor ) + 2..ActiveUpperBound( mor ) - 1 ], n -> AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( Mor[n] ) ) );
-#	return( ChainMorphism( new_source, new_range, Mor, ActiveLowerBound( new_source ) + 1 ) );
-#	end );
-#	
-#	return( RowsG, Ch_Z, Forget ] );
-#end );
