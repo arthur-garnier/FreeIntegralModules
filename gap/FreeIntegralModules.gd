@@ -29,7 +29,7 @@ DeclareGlobalFunction( "FreeIntegralModules_Example" );
 #! These constructions are due to Sebastian Posur.
 #! @Arguments G
 #! @Returns a list
-DeclareGlobalFunction( "FreeIntMods" , [ IsGroup ] );
+DeclareAttribute( "FreeIntMods" , IsGroup );
 
 #! @Description
 #! The input is a field $k$ and a finite group $G$.

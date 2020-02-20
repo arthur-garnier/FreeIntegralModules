@@ -8,8 +8,8 @@ function()
 	Print( "This is a placeholder function, replace it with your own code.\n" );
 end );
 
-InstallGlobalFunction( FreeIntMods,
-		[IsGroup],
+InstallMethod( FreeIntMods,
+		[ IsGroup ],
 	function( G )
 	local CG, compare_func, ZCG, RowsG;
 	CG := GroupAsCategory( G );;
