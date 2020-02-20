@@ -41,7 +41,7 @@ DeclareAttribute( "FreeIntMods" , IsGroup );
 #! multiplications by elements of $G$ on the standard basis of $kG$.
 #! @Arguments k,G
 #! @Returns a list 
-DeclareGlobalFunction( "LeftQGMods" , [ IsField, IsGroup ] );
+DeclareOperation( "LeftQGMods" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a field $k$ of characteristic zero 

@@ -19,8 +19,8 @@ InstallMethod( FreeIntMods,
 end );
 
 
-InstallGlobalFunction( LeftQGMods,
-		[IsField, IsGroup],
+InstallMethod( LeftQGMods,
+		[ IsField, IsGroup ],
 	function( Q, G )
 	local QG, g1, B, M;
 	QG := GroupRing( Q, G );; g1 := One( QG );; B := Basis( QG, List( Elements( G ), g -> g1 * g ) );;
