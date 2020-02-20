@@ -118,7 +118,7 @@ end );
 
 
 InstallGlobalFunction( ForgetToZ, 
-		[IsGroup],
+		[ IsGroup ],
 	function( G )
 	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Forget, sG;
 	F := FreeIntMods( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
@@ -137,7 +137,7 @@ InstallGlobalFunction( ForgetToZ,
 	function( new_source, mor, new_range )
 	return( AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( HomStructure( u, mor ) ) ) );
 	end );
-	return( [ CG, ZCG, RowsG, Z_mod, Forget ] );
+	return Forget;
 end );
 
 

@@ -47,9 +47,10 @@ Display( HomologyAt( KQ, i ) ); od;
 #! integral homology : 
 
 #! @Example
-F := ForgetToZ( G );;
-
-CG := F[1];; ZCG := F[2];; RowsG := F[3];; Forget := F[5];;
+Forget := ForgetToZ( G );;
+RowsG := AsCapCategory( Source( Forget ) );;
+ZCG := UnderlyingCategory( RowsG );;
+CG := UnderlyingCategory ( ZCG );;
 
 s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; s0 := sa*sb*sa;; ze := sa-sa;;
 
