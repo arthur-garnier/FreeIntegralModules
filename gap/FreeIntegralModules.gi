@@ -8,7 +8,7 @@ function()
 	Print( "This is a placeholder function, replace it with your own code.\n" );
 end );
 
-InstallMethod( FreeIntMods,
+InstallMethod( FREE_INT_MODS,
 		[ IsGroup ],
 	function( G )
 	local CG, compare_func, ZCG, RowsG;
@@ -19,7 +19,7 @@ InstallMethod( FreeIntMods,
 end );
 
 
-InstallMethod( LeftQGMods,
+InstallMethod( LEFT_KG_MODS,
 		[ IsField, IsGroup ],
 	function( Q, G )
 	local QG, g1, B, M;
@@ -29,8 +29,8 @@ InstallMethod( LeftQGMods,
 end );
 
 
-InstallGlobalFunction( Reps, 
-		[IsField, IsGroup],
+InstallGlobalFunction( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
+		[ IsField, IsGroup ],
 	function( Q, G )
 	local RepG, reg, Irrs, c, Mchi;
 	RepG := RepresentationCategory( G );
@@ -78,7 +78,7 @@ InstallGlobalFunction( Skeletification,
 		[IsField, IsGroup],
 	function( Q, G )
 	local Skeletification, F, R, L, RowsG, reg, B, Mchi, Qrep, Irrs, RepG, sG, CG, ZCG;
-	F := FreeIntMods( G ); L := LeftQGMods( Q, G ); R := Reps( Q, G );
+	F := FREE_INT_MODS( G ); L := LEFT_KG_MODS( Q, G ); R := IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR( Q, G );
 	CG := F[1]; ZCG := F[2]; RowsG := CapCategory( Source( [ [ One( G )/F[1]/F[2] ] ]/F[3] ) ); B := L[2]; 
 	RepG := R[1]; Irrs := R[2]; reg := R[3]; Mchi := R[4]; Qrep := UnderlyingFieldForHomalgForSemisimpleCategory( R[1] ); sG := Size( UnderlyingGroup( F[1] ) );
 	
@@ -121,7 +121,7 @@ InstallMethod( ForgetToZ,
 		[ IsGroup ],
 	function( G )
 	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Forget, sG;
-	F := FreeIntMods( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
+	F := FREE_INT_MODS( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
 	R := HomalgRing( UnderlyingMatrix( HomStructure( u,[ [ One(G)/CG/ZCG ] ]/RowsG ) ) ) ; 
 	R1 := FreeLeftPresentation( 1, R ) ; R1 := AsLeftPresentation( HomalgMatrix( "[[ 1 ]]", R ) ) ;
 	Z_mod := LeftPresentations( R ) ; sG := Size( UnderlyingGroup( CG ) );

@@ -29,7 +29,7 @@ DeclareGlobalFunction( "FreeIntegralModules_Example" );
 #! These constructions are due to Sebastian Posur.
 #! @Arguments G
 #! @Returns a list
-DeclareAttribute( "FreeIntMods" , IsGroup );
+DeclareAttribute( "FREE_INT_MODS" , IsGroup );
 
 #! @Description
 #! The input is a field $k$ and a finite group $G$.
@@ -41,7 +41,7 @@ DeclareAttribute( "FreeIntMods" , IsGroup );
 #! multiplications by elements of $G$ on the standard basis of $kG$.
 #! @Arguments k,G
 #! @Returns a list 
-DeclareOperation( "LeftQGMods" , [ IsField, IsGroup ] );
+DeclareOperation( "LEFT_KG_MODS" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a field $k$ of characteristic zero 
@@ -59,7 +59,7 @@ DeclareOperation( "LeftQGMods" , [ IsField, IsGroup ] );
 #! isotypic component.
 #! @Arguments k,G
 #! @Returns a list
-DeclareGlobalFunction( "Reps" , [ IsField, IsGroup ] );
+DeclareGlobalFunction( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a field $k$ and a homalg matrix $MH$.
