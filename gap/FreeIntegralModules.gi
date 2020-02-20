@@ -117,7 +117,7 @@ InstallGlobalFunction( Skeletification,
 end );
 
 
-InstallGlobalFunction( ForgetToZ, 
+InstallMethod( ForgetToZ, 
 		[ IsGroup ],
 	function( G )
 	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Forget, sG;
@@ -141,8 +141,8 @@ InstallGlobalFunction( ForgetToZ,
 end );
 
 
-InstallGlobalFunction( PresentationsToHomalgComplex,
-		[IsChainComplex],
+InstallMethod( PresentationsToHomalgComplex,
+		[ IsChainComplex ],
 	function( C )
 	local R, m, M, Objs, Mors, CC, n;
 	R := HomalgRing( UnderlyingMatrix( Differentials( C )[0] ) );

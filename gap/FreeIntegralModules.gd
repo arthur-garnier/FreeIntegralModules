@@ -105,11 +105,11 @@ DeclareGlobalFunction( "Skeletification" , [ IsField, IsGroup ] );
 #! $\mathbb{Z}[G]-free \to \mathbb{Z}-Mod$.
 #! @Arguments G
 #! @Returns a list
-DeclareGlobalFunction( "ForgetToZ" , [ IsGroup ] );
+DeclareAttribute( "ForgetToZ" , IsGroup );
 
 #! @Description
 #! The input is a complex in the category of left presentations of $\mathbb{Z}$
 #! The output is the corresponding chain complex, expressed in homalg (not in CAP).
 #! @Arguments C
 #! @Returns a homalg complex
-DeclareGlobalFunction( "PresentationsToHomalgComplex" , [ IsChainComplex ] );
+DeclareAttribute( "PresentationsToHomalgComplex" , IsChainComplex );
