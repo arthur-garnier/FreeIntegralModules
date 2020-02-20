@@ -62,14 +62,6 @@ DeclareOperation( "LEFT_KG_MODS" , [ IsField, IsGroup ] );
 DeclareGlobalFunction( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsField, IsGroup ] );
 
 #! @Description
-#! The input is a field $k$ and a homalg matrix $MH$.
-#! The output is the same matrix, seen as a GAP matrix.
-#! This function is used in $AsQGMatrix$.
-#! @Arguments MH
-#! @Returns a matrix
-DeclareGlobalFunction( "AsGAPMatrix" , [ IsField, IsHomalgMatrix ] );
-
-#! @Description
 #! The input is a morphism $f$ in $RowsG$.
 #! The output is the corresponding matrix of $\mathbb{Z}[G]$.
 #! This function is used in $Skeletification$.

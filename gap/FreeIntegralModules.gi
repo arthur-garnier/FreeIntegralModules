@@ -43,19 +43,6 @@ InstallGlobalFunction( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
 	return( [ RepG, Irrs, reg, Mchi ] );
 end );
 
-
-InstallGlobalFunction( AsGAPMatrix,
-		[IsField, IsHomalgMatrix],
-	function( Q, MH )
-	local m, n, i, j, Mat;
-	m := DimensionsMat( MH )[ 1 ];; n := DimensionsMat( MH )[ 2 ];; Mat:=NullMat( m, n, Q );;
-	for i in [1..m] do
-	for j in [1..n] do
-	Mat[ i, j ]:=MH[ i, j ]; od; od;
-	return( Mat );
-end );
-
-
 InstallGlobalFunction( AsQGMatrix,
 		[IsList, IsList, IsList],
 	function( F, L, f )
@@ -63,7 +50,7 @@ InstallGlobalFunction( AsQGMatrix,
 	RowsG := F[3]; 
 	u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
 	QG := L[1]; B := L[2]; M := L[3]; sG := Size( UnderlyingGroup( F[1] ) );
-	Mat := AsGAPMatrix( LeftActingDomain( QG ), UnderlyingMatrix( HomStructure( u , f/RowsG ) ) );; m := DimensionsMat( Mat )[ 1 ]/sG;; n := DimensionsMat( Mat )[ 2 ]/sG;;
+	Mat := EntriesOfHomalgMatrixAsListList( UnderlyingMatrix( HomStructure( u , f/RowsG ) ) );; m := DimensionsMat( Mat )[ 1 ]/sG;; n := DimensionsMat( Mat )[ 2 ]/sG;;
 	MatG := NullMat( m , n , QG );;
 	for i in [1..m] do
 	for j in [1..n] do
@@ -148,7 +135,7 @@ InstallMethod( PresentationsToHomalgComplex,
 	R := HomalgRing( UnderlyingMatrix( Differentials( C )[0] ) );
 	m := ActiveLowerBound( C ) + 1; M := ActiveUpperBound( C ) - 1;
 	Objs := List( [ m..M ], n -> Sum( DimensionsMat( UnderlyingMatrix( Objects( C )[n] ) ) )*R );
-	Mors := List( [ m + 1..M ], n -> TransposedMatrix( HomalgMatrix( AsGAPMatrix( Integers, UnderlyingMatrix( Differentials( C )[n] ) ), R ) ) );
+	Mors := List( [ m + 1..M ], n -> TransposedMatrix( HomalgMatrix( EntriesOfHomalgMatrixAsListList( UnderlyingMatrix( Differentials( C )[n] ) ), R ) ) );
 	Mors := List( [ 0..Size( Mors ) - 1 ], n -> HomalgMap( Mors[ Size( Mors ) - n ], Objs[ Size( Objs ) - n - 1 ], Objs[ Size( Objs ) - n ] ) );
 	CC := HomalgComplex( Mors[1], m + 1 ); 
 	if Size( Mors ) > 1 then 
