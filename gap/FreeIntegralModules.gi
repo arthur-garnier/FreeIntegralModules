@@ -156,35 +156,3 @@ InstallMethod( PresentationsToHomalgComplex,
 	Add( CC, Mors[n] ); od; fi;
 	return( CC );
 end );
-
-
-#InstallGlobalFunction( ForgetToZ, 
-#		[IsGroup],
-#	function( G )
-#	local F, CG, ZCG, RowsG, u, R, R1, Z_mod, Ch_Z, Forget;
-#	F := FreeIntMods( G ); CG := F[1]; ZCG := F[2]; RowsG := F[3]; u := AsAdditiveClosureObject( LinearClosureObject( F[2], GroupAsCategoryUniqueObject( F[1] ) ) ); 
-#	R := HomalgRing( UnderlyingMatrix( HomStructure( u,[ [ One(G)/CG/ZCG ] ]/RowsG ) ) ) ; 
-#	R1 := FreeLeftPresentation( 1, R ) ; R1 := AsLeftPresentation( HomalgMatrix( "[[ 1 ]]", R ) ) ;
-#	Z_mod := LeftPresentations( R ) ;
-#	Ch_Z := ChainComplexCategory( Z_mod ) ;
-#
-#	Forget := CapFunctor( "Forget", CapCategory( ChainComplex( [ [ [ One(G)/CG/ZCG ] ]/RowsW ], 0 ) ), Ch_Z );
-#
-#	AddObjectFunction( Forget,
-#	function( obj )
-#	local D;
-#	D := List( Differentials( obj ), d -> HomStructure( u, d ) );
-#	D := List( [ ActiveLowerBound( obj ) + 2..ActiveUpperBound( obj ) - 1 ], n-> AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( D[n] ) ) );
-#	return( ChainComplex( D, ActiveLowerBound( obj ) + 2 ) );
-#	end );
-#
-#	AddMorphismFunction( Forget,
-#	function(new_source,mor,new_range)
-#	local Mor;
-#	Mor := List( Morphisms( mor ), f -> HomStructure( u, f ) );
-#	Mor := List( [ ActiveLowerBound( mor ) + 2..ActiveUpperBound( mor ) - 1 ], n -> AsMorphismBetweenFreeLeftPresentations( UnderlyingMatrix( Mor[n] ) ) );
-#	return( ChainMorphism( new_source, new_range, Mor, ActiveLowerBound( new_source ) + 1 ) );
-#	end );
-#	
-#	return( RowsG, Ch_Z, Forget ] );
-#end );
