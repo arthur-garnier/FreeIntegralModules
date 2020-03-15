@@ -29,7 +29,7 @@ InstallMethod( LEFT_KG_MODS,
 end );
 
 
-InstallGlobalFunction( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
+InstallMethod( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
 		[ IsField, IsGroup ],
 	function( Q, G )
 	local RepG, reg, Irrs, c, Mchi;
@@ -43,7 +43,7 @@ InstallGlobalFunction( IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR,
 	return( [ RepG, Irrs, reg, Mchi ] );
 end );
 
-InstallGlobalFunction( AsQGMatrix,
+InstallMethod( AsQGMatrix,
 		[IsList, IsList, IsList],
 	function( F, L, f )
 	local RowsG, u, QG, B, M, sG, Mat , m , n , MatG , i , j , C , c;
@@ -61,7 +61,7 @@ InstallGlobalFunction( AsQGMatrix,
 end );
 
 
-InstallGlobalFunction( Skeletification,
+InstallMethod( Skeletification,
 		[IsField, IsGroup],
 	function( Q, G )
 	local Skeletification, F, R, L, RowsG, reg, B, Mchi, Qrep, Irrs, RepG, sG, CG, ZCG;
