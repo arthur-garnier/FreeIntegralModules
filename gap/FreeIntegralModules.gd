@@ -59,7 +59,7 @@ DeclareOperation( "LEFT_KG_MODS" , [ IsField, IsGroup ] );
 #! isotypic component.
 #! @Arguments k,G
 #! @Returns a list
-DeclareGlobalFunction( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsField, IsGroup ] );
+DeclareOperation( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a morphism $f$ in $RowsG$.
@@ -67,7 +67,7 @@ DeclareGlobalFunction( "IMAGES_OF_GROUP_ELEMENTS_FOR_SCALAR_EXT_FUNCTOR" , [ IsF
 #! This function is used in $Skeletification$.
 #! @Arguments a list of three lists
 #! @Returns a matrix in $\mathbb{Z}[G]$.
-DeclareGlobalFunction( "AsQGMatrix" , [ IsList, IsList, IsList ] );
+DeclareOperation( "AsQGMatrix" , [ IsList, IsList, IsList ] );
 
 #! @Description
 #! The input is a field $k$ of characteristic zero 
@@ -86,17 +86,14 @@ DeclareGlobalFunction( "AsQGMatrix" , [ IsList, IsList, IsList ] );
 #! to work in the categories provided by this function and not the ones given
 #! by an above one.
 #! @Arguments k,G
-#! @Returns a list
-DeclareGlobalFunction( "Skeletification" , [ IsField, IsGroup ] );
+#! @Returns a cap functor
+DeclareOperation( "Skeletification" , [ IsField, IsGroup ] );
 
 #! @Description
 #! The input is a finite group $G$.
-#! The output is a list $[RowsG,Z_mod,F]$ with $RowsG$ the category
-#! of left free $\mathbb{Z}[G]$-modules of finite rank, $Z_mod$ is
-#! the category of abelian groups and $F$ is the forgetful functor
-#! $\mathbb{Z}[G]-free \to \mathbb{Z}-Mod$.
+#! The output is the forgetful functor $\mathbb{Z}[G]-free \to \mathbb{Z}-Mod$.
 #! @Arguments G
-#! @Returns a list
+#! @Returns a cap functor
 DeclareAttribute( "ForgetToZ" , IsGroup );
 
 #! @Description
