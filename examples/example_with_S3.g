@@ -18,7 +18,9 @@ RowsG := AsCapCategory( Source( Skel ) );;
 ZCG := UnderlyingCategory( RowsG );;
 CG := UnderlyingCategory( ZCG );;
 
-s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; s0 := sa*sb*sa;; ze := sa-sa;;
+s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; 
+
+s0 := sa*sb*sa;; ze := sa-sa;;
 
 d1 := [ [ s1 - sa, s1 - sb, s1 - s0 ] ]/RowsG;; 
 
@@ -52,7 +54,9 @@ RowsG := AsCapCategory( Source( Forget ) );;
 ZCG := UnderlyingCategory( RowsG );;
 CG := UnderlyingCategory ( ZCG );;
 
-s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; s0 := sa*sb*sa;; ze := sa-sa;;
+s1 := ( )/CG/ZCG;; sa := (1,2)/CG/ZCG;; sb := (2,3)/CG/ZCG;; 
+
+s0 := sa*sb*sa;; ze := sa-sa;;
 
 d1 := [ [ s1 - sa, s1 - sb, s1 - s0 ] ]/RowsG;; 
 
